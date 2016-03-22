@@ -11,9 +11,9 @@
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 /*
 |--------------------------------------------------------------------------
@@ -26,15 +26,25 @@ Route::get('/', function () {
 |
  */
 
+// Route::group(['middleware' => ['web']], function () {
+//     Route::get('staff/search/{key?}', [
+//         'as' => 'staff.search',
+//         'uses' => 'StaffController@search'
+//     ]);
+//     Route::resource('staff', 'StaffController');
+// });
+
 Route::group(['middleware' => ['web', 'auth']], function () {
+    Route::get('/', 'StaffController@index');
+
     Route::get('staff/search/{key?}', [
         'as' => 'staff.search',
         'uses' => 'StaffController@search'
     ]);
+    Route::resource('staff', 'StaffController');
 });
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/home', 'HomeController@index');
 });

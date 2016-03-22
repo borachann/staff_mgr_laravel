@@ -2,14 +2,22 @@
 
 @section('content')
 
-<style>
-	div.container {
-		padding-right: 10px;
-	}
-</style>
+<h2 align="center">Staff Management</h2>
+
+@if (session('success_message '))
+	<div class="alert alert-success">
+		{{ session('success_message ') }}
+	</div>
+@endif
+
+@if (session('failure_message'))
+	<div class="alert alert-danger">
+		{{ session('failure_message ') }}
+	</div>
+@endif
 
 
-
+<hr>
 <table class="table">
 	<thead>
 		<tr>
@@ -17,7 +25,7 @@
 			<th>Name</th>
 			<th>Gender</th>
 			<th>Position</th>
-			<th>Date of Birth</th>
+			{{-- <th>Date of Birth</th> --}}
 			<th>Skill</th>
 			<th>Level</th>
 			<th>Readable</th>
@@ -33,12 +41,11 @@
 		@foreach ($staffs as $staff)
 			<tr>
 				<td style="display:none;">{{ $staff->id }}</td>
-				<td><li></li></td>
 				<td>{{ $staff->fp_number }}</td>
 				<td>{{ $staff->name }}</td>
 				<td>{{ $staff->gender }}</td>
 				<td>{{ $staff->position }}</td>
-				<td>{{ $staff->dob }}</td>
+				{{-- <td>{{ $staff->dob }}</td> --}}
 				<td>{{ $staff->skill }}</td>
 				<td>{{ $staff->level }}</td>
 				<td>{{ $staff->readable }}</td>
