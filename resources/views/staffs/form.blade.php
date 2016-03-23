@@ -41,36 +41,24 @@
 		</div>
 
 		<div class="form-group">
-		  <label class="control-label col-md-2" for="txtAttach">Attach File : </label>
+		  <label class="control-label col-md-2">Attach File : </label>
 		  <div class="col-md-10">
-		  		<input type="file" class="form-control" rows="5" id="txtAttach" name="file_path">
+		  		<sapn id="file_up"><input type="file" class="form-control" rows="5" id="txtAttach" name="file_path"></sapn>
 		  </div>
 		</div>
 
 		<div class="form-group">
-		  <label class="control-label col-md-2" for="txtAttach"></label>
+		  <label class="control-label col-md-2"></label>
 		  <div class="col-md-10" style="text-align: right;">
 		  		<button type="submit" class="btn btn-primary">{{ $btnName }}</button>
-		  		<button type="button" class="btn btn-primary">Cancel</button>
+		  		{{ link_to_route('staff.index','Cancel',null,['class' => 'btn btn-primary']) }}
+		  		{{-- {{ link_to_route('staff','Cancel',['class' => 'btn btn-primary'] )}} --}}
+		  		{{-- {{ link_to_route('staff.index','Cancel', null) }} --}}
+
 		  </div>
 		</div>
 
 	</div>
 
-	<div class="col-md-2">
-		<div class="form-group">
-	      <div class="col-md-3">
-	 				<a href="javascript:" class="btn_photo_x" style="display: none;">
-						<img src="/img/profile.png" id="photoDeleteBtn">
-					</a>
-				<img src="/img/profile.png" id="PHOTO_IMG" data-id="PHOTO_IMG" style="width: 130px;height: 130px;" alt="">
-				<form action="php/fileuploaded.php" id="formUpload1" method="post">
-					  	<input class="hide" id="upload" type="file" name="photo_path" value="upload">
-				</form>
-			</div>
-	 	</div>
-	 	<div class="form-group">
-			<label class="control-label col-md-10" style="text-align: center;" for="txtAttach"><i>Profile Picture</i></label>
-	 	</div>
-	</div>
+
 </div>

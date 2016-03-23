@@ -1,0 +1,36 @@
+<style>
+        body {
+            font-family: 'Lato';
+        }
+
+        .fa-btn {
+            margin-right: 6px;
+        }
+        input[type="checkbox"] {
+                width: 18px; /*Desired width*/
+                height: 18px; /*Desired height*/
+            }
+            textarea {
+                resize: none;
+            }
+        a:hover{
+            text-decoration: none;
+            
+        }
+        #upload
+            {   width:120px;
+                
+                height: 120px;
+                line-height: 0;
+                font-size: 0px;
+                position: absolute;
+                top:0px;
+                opacity: 0;
+                filter: alpha(opacity = 0);
+                -ms-filter: "alpha(opacity=0)";
+                cursor:pointer;
+                margin: 0;
+                padding:0;
+            }
+
+</style>

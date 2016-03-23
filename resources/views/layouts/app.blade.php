@@ -5,33 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Home</title>
 
     <!-- Fonts -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
+    <link href="/css/font-awesome-4.5.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+    <link href="/css/font.css" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel='stylesheet' type='text/css'>
+
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
-    <style>
-        body {
-            font-family: 'Lato';
-        }
 
-        .fa-btn {
-            margin-right: 6px;
-        }
-        input[type="checkbox"] {
-                width: 18px; /*Desired width*/
-                height: 18px; /*Desired height*/
-            }
-            textarea {
-                resize: none;
-            }
-
-    </style>
 
     @stack('styles')
 </head>
@@ -58,14 +44,21 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <!-- <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/home') }}">Home</a></li>
-                    </ul> -->
+                    <ul class="nav navbar-nav">
+                        <li><a>Search :</a></li>
+                    </ul>
                     <form role="search" class="navbar-form navbar-left" method="GET" action="{{ route('staff.index') }}">
                         <div class="form-group">
                             <input type="text" name="key" value="{{ isset($key) ? $key : '' }}" placeholder="Search" class="form-control">
                         </div>
                     </form>
+                    <ul class="nav navbar-nav">
+                        <li>{{ link_to_route('staff.create', 'Create New Employee', null) }}</li>
+                    </ul>
+
+                    <ul class="nav navbar-nav">
+                        <li>{{ link_to_route('staff.create', 'Report', null) }}</li>
+                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -90,12 +83,11 @@
         </nav>
     @endif
 
-    <div class="container">
+<div class="container">
         @yield('content')
-    </div>
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/js/common.js"></script>
 
     @stack('scripts')
 

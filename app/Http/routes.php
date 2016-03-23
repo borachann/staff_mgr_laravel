@@ -37,6 +37,11 @@
 Route::group(['middleware' => ['web', 'auth']], function () {
     Route::get('/', 'StaffController@index');
 
+    Route::post('upload/image', [
+        'as' => 'upload.image',
+        'uses' => 'UploadController@image'
+    ]);
+
     Route::get('staff/search/{key?}', [
         'as' => 'staff.search',
         'uses' => 'StaffController@search'

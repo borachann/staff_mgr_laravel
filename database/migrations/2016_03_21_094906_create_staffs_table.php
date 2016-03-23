@@ -24,6 +24,8 @@ class CreateStaffsTable extends Migration
             $table->string('photo_path')->nullable();
             $table->string('file_path')->nullable();
             $table->string('description')->nullable();
+            $table->string('address')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

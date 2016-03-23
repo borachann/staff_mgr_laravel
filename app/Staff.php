@@ -22,6 +22,8 @@ class Staff extends Model
         'work_grp',
         'photo_path',
         'file_path',
-        'description'
+        'description',
+        'email',
+        'address'
     ];
 }
