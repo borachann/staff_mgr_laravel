@@ -37,14 +37,23 @@
 Route::group(['middleware' => ['web', 'auth']], function () {
     Route::get('/', 'StaffController@index');
 
+    Route::post('upload/file', [
+        'as' => 'upload.file',
+        'uses' => 'UploadController@file'
+    ]);
+
     Route::post('upload/image', [
         'as' => 'upload.image',
         'uses' => 'UploadController@image'
     ]);
 
-    Route::get('staff/search/{key?}', [
-        'as' => 'staff.search',
-        'uses' => 'StaffController@search'
+    // Route::get('staff/search/{key?}', [
+    //     'as' => 'staff.search',
+    //     'uses' => 'StaffController@search'
+    // ]);
+    Route::get('staff/delete/{key}', [
+        'as' => 'staff.delete',
+        'uses' => 'StaffController@updateStatus'
     ]);
     Route::resource('staff', 'StaffController');
 });

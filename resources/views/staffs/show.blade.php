@@ -12,6 +12,21 @@
 				<input type="hidden" name="_method" value="PATCH">
 				@include('staffs.form', ['btnName' => 'Update', 'showDate' => true])
 			{{ Form::close() }}
+
+			{{ Form::model($staff, ['route' => ['staff.update', $staff->id] ] ) }}
+		        <div class="col-md-2">
+					<div class="form-group">
+				      	<div class="col-md-3">
+			 				<a href="javascript:" class="btn_photo_x" style="display: none;">
+								<img src="/img/profile.png" id="photoDeleteBtn">
+							</a>
+							<img src="/upload/{{ $staff->photo_path }}" id="PHOTO_IMG" data-id="PHOTO_IMG" style="width: 130px;height: 130px;" alt="">
+						</div>
+				 	</div>
+				</div>
+			{{ Form::close() }}
+
+
 		{{-- </form> --}}
 
 @endsection

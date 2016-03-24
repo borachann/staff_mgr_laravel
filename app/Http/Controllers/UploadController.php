@@ -2,23 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\FileRequest;
+use App\Http\Requests\ImageRequest;
 
 // use Illuminate\Support\Facades\File;
-
 // use Illuminate\Support\Facades\Storage;
-
-//
-// use Request;
 
 class UploadController extends Controller
 {
-    public function image(Request $req)
+
+    public function file(FileRequest $req)
     {
         $data = [];
+        if ($req->hasFile('fileUpload')) {
+            $file = $req->file('fileUpload');
 
-        if ($req->has('imageUpload')) {
+            $data['extension'] = $file->getClientOriginalExtension();
+            $data['name'] = $file->getFilename();
+            $data['type'] = $file->getClientMimeType();
+            $data['realpath'] = $file->getRealPath();
+            $data['realname'] = $file->getClientOriginalName();
+            $data['dynamicname'] = time() . $data['realname'];
 
+            $file->move('upload/', $data['dynamicname']);
+        }
+        return $data;
+    }
+
+    public function image(ImageRequest $req)
+    {
+        $data = [];
+        if ($req->hasFile('imageUpload')) {
             $file = $req->file('imageUpload');
 
             $data['extension'] = $file->getClientOriginalExtension();
@@ -26,24 +40,20 @@ class UploadController extends Controller
             $data['type'] = $file->getClientMimeType();
             $data['realpath'] = $file->getRealPath();
             $data['realname'] = $file->getClientOriginalName();
+            $data['dynamicname'] = time() . $data['realname'];
 
-            $file->move('upload/', $data['realname'] . '.' . $data['extension']);
+            $file->move('upload/', $data['dynamicname']);
         }
-
-        // Storage::disk('local')->put($data['name'] . '.' . $data['extension'], File::get($file)),
-
         return $data;
-
-        // $extension = $file->getClientOriginalExtension();
-
-        // Storage::disk('local')->put($file->getFilename().'.'.$extension,  File::get($file));
-        // $entry = new Fileentry();
-        // $entry->mime = $file->getClientMimeType();
-        // $entry->original_filename = $file->getClientOriginalName();
-        // $entry->filename = $file->getFilename().'.'.$extension;
-
-        // $entry->save();
-
-        // return redirect('fileentry');
     }
+
+    public function downloadImage()
+    {
+        $result = $_POST['filename'];
+        $entry = File::where('filename', $result)->firstOrFail();
+        $file = Storage::disk()->get($entry->filePath);
+        $headers = array('Content-Type' => $entry->mimetype);
+        return response()->download(storage_path($entry->filePath), $result, $headers);
+    }
+
 }

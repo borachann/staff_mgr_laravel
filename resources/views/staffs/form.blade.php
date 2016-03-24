@@ -2,6 +2,7 @@
 	<div class="col-md-10">
 
 		@include('partials/form-input', ['label' => 'FP Number', 'size' => '10' ,'name' => 'fp_number', 'id' => 'txtFP'])
+
 		@include('partials/form-input', ['label' => 'Name', 'size' => '50' , 'name' => 'name', 'id' => 'txtName'])
 
 		<div class="form-group">
@@ -19,9 +20,13 @@
 		</div>
 
 		@include('partials/form-input', ['label' => 'Date of Birth', 'size' => '50', 'name' => 'dob', 'id' => 'txtdob'])
+
 		@include('partials/form-input', ['label' => 'Position', 'size' => '100', 'id' => 'txtposition', 'name' => 'position'])
+
 		@include('partials/form-input', ['label' => 'Skill', 'id' => 'txtskill', 'name' => 'skill', 'size' => '50'])
+
 		@include('partials/form-input', ['label' => 'Level', 'size' => '50','id' => 'txtlevel', 'name' => 'level'])
+
 		<div class="form-group">
 			<label class="control-label col-md-2">Read Drawing? : </label>
 			<div class="col-md-10">
@@ -29,8 +34,11 @@
 				{{-- <label ><input style="font-size: 10px !important; " type="checkbox" name="readable" id="readable"></label> --}}
 	      	</div>
 		</div>
+
 		@include('partials/form-input', ['label' => 'Lead Group', 'id' => 'txtldgrp', 'name' => 'ld_grp', 'size' => '50'])
+
 		@include('partials/form-input', ['label' => 'Phone Number', 'id' => 'txtphone', 'name' => 'phone', 'size' => '10'])
+
 		@include('partials/form-input', ['label' => 'Work at Group', 'id' => 'txtworkgrp', 'name' => 'work_grp', 'size' => '50'])
 
 		@if (isset($showDate))
@@ -48,7 +56,7 @@
 		<div class="form-group">
 		  <label class="control-label col-md-2">Attach File : </label>
 		  <div class="col-md-10">
-		  		<sapn id="file_up"><input type="file" class="form-control" rows="5" id="txtAttach" name="file_path"></sapn>
+		  		<sapn id="file_up"><input type="text" class="form-control" rows="5" id="txtAttach" name="file_path"></sapn>
 		  </div>
 		</div>
 

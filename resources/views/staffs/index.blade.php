@@ -65,7 +65,7 @@
 					{{-- <a class="on-default edit-row" href="{{ route('staff.edit',$staff->id) }}">
 						<i class="fa fa-trash-o"></i>
 					</a> --}}
-					<a class="on-default edit-row" href="{{ route('staff.edit',$staff->id) }}">
+					<a class="on-default edit-row" href="{{ route('staff.delete',$staff->id) }}">
 						<i class="fa fa-trash-o fa-fw"></i>
 					</a> |
 					<a class="on-default edit-row" href="{{ route('staff.edit',$staff->id) }}">

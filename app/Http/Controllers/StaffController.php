@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Staff;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class StaffController extends Controller
 {
@@ -17,21 +16,6 @@ class StaffController extends Controller
         $key = $request->has('key') ? $request->input('key') : '';
         $data['key'] = $key;
         $data['staffs'] = Staff::searchOrList($key)->paginate($this->staffPerPage);
-        // if ($request->has('key')) {
-        //     $data['key'] = $request->key;
-        //     $data['staffs'] = Staff::where('status', true)
-        //         ->Where(function ($query) use ($request) {
-        //             $query->where('fp_number', $request->key)
-        //                 ->orwhere('name', 'like', $request->key . '%');})
-        //         ->orderBy('name', 'asc')->paginate($this->staffPerPage);
-
-        // } else {
-        //     // $data['staffs'] = Staff::latest()->paginate(5);
-
-        //     $data['staffs'] = Staff::where('status', true)->orderBy('name', 'asc')->paginate($this->staffPerPage);
-        //     // array_push($data['staffs'],'order' = 10 * ($currentPage - 1) + 1);
-        //     //dd($data);
-        // }
 
         return view('staffs.index', $data);
     }
@@ -46,22 +30,10 @@ class StaffController extends Controller
         $allData = $request->all();
         $allData['readable'] = $request->has('readable') ? true : false;
         $allData['status'] = true;
+        $allData['photo_path'] = $request->photo_path;
         Staff::create($allData);
-        // return redirect('/staff');
-        return redirect()->route('staff.index');
 
-        $image = Request::file('filefield');
-        dd($image);
-        //  return redirect('/')->with('success_message', 'The staff was created success.');
-        // $validator = Validator::make([$image], ['image' => 'required']);
-        // if ($validator->fails()) {
-        //     return $this->errors(['message' => 'Not an image.', 'code' => 400]);
-        // }
-        // $destinationPath = storage_path() . '/uploads';
-        // if (!$image->move($destinationPath, $image->getClientOriginalName())) {
-        //     return $this->errors(['message' => 'Error saving the file.', 'code' => 400]);
-        // }
-        // return response()->json(['success' => true], 200);
+        return redirect()->route('staff.index');
 
     }
 
@@ -82,6 +54,7 @@ class StaffController extends Controller
         $staff = Staff::find($id);
         $data = $request->all();
         $data['readable'] = $request->has('readable') ? true : false;
+        $data['photo_path'] = $request->photo_path;
         $staff->update($data);
         return redirect()->route('staff.index');
     }
@@ -90,6 +63,13 @@ class StaffController extends Controller
     {
         $staff = Staff::find($id);
         $staff->delete();
+        return redirect()->route('staff.index');
+    }
+
+    public function updateStatus($id)
+    {
+        // $staff = Staff::where('id', $id)->update(['status', false]);
+        Staff::where('id', $id)->update(['status' => false]);
         return redirect()->route('staff.index');
     }
 }
