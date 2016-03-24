@@ -34,10 +34,10 @@
 			{{-- <th>Lead Group</th> --}}
 			<th>Phone</th>
 			{{-- <th>Work Group</th> --}}
-			<th>Delete</th>
+			{{-- <th>Delete</th> --}}
 			{{-- <th>Start Date</th>
 			<th>Update</th> --}}
-			<th>Action</th>
+			<th style="text-align: center;">Action</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -60,11 +60,14 @@
 				{{-- <td>{{ $staff->work_grp }}</td> --}}
 				{{-- <td>{{ $staff->created_at }}</td>
 				<td>{{ $staff->updated_at }}</td> --}}
-				<td>@include('staffs.delete')</td>
+				{{-- <td>@include('staffs.delete')</td> --}}
 				<td class="actions" style="text-align:center;">
 					{{-- <a class="on-default edit-row" href="{{ route('staff.edit',$staff->id) }}">
 						<i class="fa fa-trash-o"></i>
 					</a> --}}
+					<a class="on-default edit-row" href="{{ route('staff.edit',$staff->id) }}">
+						<i class="fa fa-trash-o fa-fw"></i>
+					</a> |
 					<a class="on-default edit-row" href="{{ route('staff.edit',$staff->id) }}">
 				      	<i class="fa fa-pencil"></i>
 				    </a> |

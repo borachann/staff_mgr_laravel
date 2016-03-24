@@ -14,16 +14,24 @@ class StaffController extends Controller
 
     public function index(Request $request)
     {
-        if ($request->has('key')) {
-            $data['key'] = $request->key;
-            $data['staffs'] = Staff::where('fp_number', $request->key)->orWhere('name', 'like', $request->key . '%')->orderBy('name', 'asc')->paginate($this->staffPerPage);
-        } else {
-            // $data['staffs'] = Staff::latest()->paginate(5);
+        $key = $request->has('key') ? $request->input('key') : '';
+        $data['key'] = $key;
+        $data['staffs'] = Staff::searchOrList($key)->paginate($this->staffPerPage);
+        // if ($request->has('key')) {
+        //     $data['key'] = $request->key;
+        //     $data['staffs'] = Staff::where('status', true)
+        //         ->Where(function ($query) use ($request) {
+        //             $query->where('fp_number', $request->key)
+        //                 ->orwhere('name', 'like', $request->key . '%');})
+        //         ->orderBy('name', 'asc')->paginate($this->staffPerPage);
 
-            $data['staffs'] = Staff::orderBy('name', 'asc')->paginate($this->staffPerPage);
-            // array_push($data['staffs'],'order' = 10 * ($currentPage - 1) + 1);
-            //dd($data);
-        }
+        // } else {
+        //     // $data['staffs'] = Staff::latest()->paginate(5);
+
+        //     $data['staffs'] = Staff::where('status', true)->orderBy('name', 'asc')->paginate($this->staffPerPage);
+        //     // array_push($data['staffs'],'order' = 10 * ($currentPage - 1) + 1);
+        //     //dd($data);
+        // }
 
         return view('staffs.index', $data);
     }
@@ -37,9 +45,10 @@ class StaffController extends Controller
     {
         $allData = $request->all();
         $allData['readable'] = $request->has('readable') ? true : false;
+        $allData['status'] = true;
         Staff::create($allData);
         // return redirect('/staff');
-        // return redirect()->route('staff.index');
+        return redirect()->route('staff.index');
 
         $image = Request::file('filefield');
         dd($image);

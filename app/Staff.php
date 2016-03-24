@@ -24,6 +24,22 @@ class Staff extends Model
         'file_path',
         'description',
         'email',
-        'address'
+        'address',
+        'status'
     ];
+
+    public function scopeSearchOrList($q, $key = '')
+    {
+        if ($key != '') {
+            $q->where('status', true)
+                ->Where(function ($query) use ($key) {
+                    $query->where('fp_number', $key)
+                        ->orwhere('name', 'like', $key . '%');})
+                ->orderBy('name', 'asc');
+        } else {
+            $q->where('status', true)->orderBy('name', 'asc');
+        }
+
+    }
+
 }

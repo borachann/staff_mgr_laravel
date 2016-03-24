@@ -10,8 +10,7 @@
 
 			{{ Form::model($staff, ['route' => ['staff.update', $staff->id] ] ) }}
 				<input type="hidden" name="_method" value="PATCH">
-				@include('staffs.form', ['btnName' => 'Update'])
-
+				@include('staffs.form', ['btnName' => 'Update', 'showDate' => true])
 			{{ Form::close() }}
 		{{-- </form> --}}
 
@@ -21,6 +20,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#file_up").html('<a href="#" class="control-label col-md-10" style="text-align: left;"><b>Download The Attach File</b></a>');
+		$("input[type=text], textarea").attr('readonly','readonly');
+		$("input[type=radio], input[type=checkbox]").attr('disabled',true);
 	});
 </script>
 @endpush

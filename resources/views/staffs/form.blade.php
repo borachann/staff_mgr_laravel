@@ -33,10 +33,15 @@
 		@include('partials/form-input', ['label' => 'Phone Number', 'id' => 'txtphone', 'name' => 'phone', 'size' => '10'])
 		@include('partials/form-input', ['label' => 'Work at Group', 'id' => 'txtworkgrp', 'name' => 'work_grp', 'size' => '50'])
 
+		@if (isset($showDate))
+			@include('partials/form-input', ['label' => 'Start Date', 'size' => '50', 'name' => 'created_at', 'id' => 'txtstartdate', 'value' => $staff->created_at->format('d-m-Y')])
+		@endif
+
 		<div class="form-group">
 		  <label class="control-label col-md-2" for="txtposition">Description : </label>
 		  <div class="col-md-10">
-		  		<textarea class="form-control" rows="5" name="description" id="txtdescription"></textarea>
+		  		{{-- <textarea class="form-control" rows="5" name="description" id="txtdescription"></textarea> --}}
+		  		{{ Form::textarea('description', null, ['class' => 'form-control', 'rows' => 5]) }}
 		  </div>
 		</div>
 

@@ -45,6 +45,11 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                    <!-- <li><a class="fa fa-home fa-fw"></a></li> -->
+                        <li><a href="{{ route('staff.index') }}"><i class="fa fa-home fa-lg"></i>&nbsp; Home</a></li>
+                        <!-- <li ></li>&nbsp; Home  -->
+                    </ul>
+                    <ul class="nav navbar-nav">
                         <li><a>Search :</a></li>
                     </ul>
                     <form role="search" class="navbar-form navbar-left" method="GET" action="{{ route('staff.index') }}">

@@ -26,6 +26,7 @@ class CreateStaffsTable extends Migration
             $table->string('description')->nullable();
             $table->string('address')->nullable();
             $table->string('email')->nullable();
+            $table->boolean('status');
             $table->timestamps();
         });
     }
