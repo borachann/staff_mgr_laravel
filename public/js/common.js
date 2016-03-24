@@ -27,4 +27,6 @@ includeJs("/js/common/jquery.form.min.js");
 includeJs("/js/common/jquery.bpopup.min.js");
 includeJs("/js/common/xregexp-all.js"); 
 includeJs("/js/common/moment.min.js");
+includeJs("/js/common/jquery.ui.datepicker-ko.js");
+includeJs("/js/common/jquery-ui.js");
 

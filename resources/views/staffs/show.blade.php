@@ -34,7 +34,7 @@
 @push('scripts')
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#file_up").html('<a href="#" class="control-label col-md-10" style="text-align: left;"><b>Download The Attach File</b></a>');
+		$("#txtAttach").parent().html('<a href="#" class="control-label col-md-10" style="text-align: left;"><b>Download The Attach File</b></a>'); 
 		$("input[type=text], textarea").attr('readonly','readonly');
 		$("input[type=radio], input[type=checkbox]").attr('disabled',true);
 	});
@@ -43,9 +43,7 @@
 
 @push('styles')
 <style type="text/css">
-	#txtAttach{
-		display: none;
-	}
+	
 	button[type="submit"] {
         display: none;
     }

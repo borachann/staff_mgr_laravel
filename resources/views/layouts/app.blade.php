@@ -10,7 +10,7 @@
     <!-- Fonts -->
     <link href="/css/font-awesome-4.5.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="/css/font.css" rel='stylesheet' type='text/css'>
-
+    <link rel="stylesheet" href="/css/jquery-ui.css">
     <!-- Styles -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/styles.css" rel='stylesheet' type='text/css'>

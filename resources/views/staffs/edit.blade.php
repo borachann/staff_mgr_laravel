@@ -12,6 +12,7 @@
 				<input type="hidden" name="_method" value="PATCH">
 				@include('staffs.form', ['btnName' => 'Update'])
 				<input id="txtImageUploaded" type="hidden" value="{{ $staff->photo_path }}" name="photo_path">
+
 			{{ Form::close() }}
 
 			<form action="{{ route('upload.image') }}" method="post" enctype="multipart/form-data" id="frmImageUpload">
@@ -23,11 +24,15 @@
 								<img src="/img/profile.png" id="photoDeleteBtn">
 							</a>
 							<img src="/img/profile.png" id="PHOTO_IMG" data-id="PHOTO_IMG" style="width: 130px;height: 130px;" alt="">
-							<input id="fileUpload" type="file" name="imageUpload" value="upload">
+							<input id="txtImageUpload" type="file" name="imageUpload" value="upload">
 						</div>
 				 	</div>
 				</div>
 		    </form>
+		    <form action="{{ route('upload.file') }}" method="POST" enctype="multipart/form-data" id="frmFileUpload">
+				{{ csrf_field() }}
+				<input id="txtFileUpload" class="hide" type="file" name="fileUpload" >
+			</form>
 		{{-- </form> --}}
 
 @endsection
@@ -35,9 +40,25 @@
 @push('scripts')
 <script>
 	$(function(){
+
+		setCalendar();
+		function setCalendar(){		
+			$("#REGS_DATE_S").datepicker({
+	      	defaultDate: new Date(),
+		    setDate: new Date(),
+		    changeMonth: true,
+		    numberOfMonths: 1,
+		    dateFormat: "yy-mm-dd",
+		    onClose: function( selectedDate ) {			    	  
+				$("#REGS_DATE_E").datepicker("option", "minDate", selectedDate);
+		    }
+		});
+		// $("#REGS_DATE_S").datepicker('setDate', moment().format('YYYY-MM-DD'));
+	}
+		
 		$("#PHOTO_IMG").attr('src','/upload/' + $("#txtImageUploaded").val());
 
-		$('#fileUpload').on('change', function(){
+		$('#txtImageUpload').on('change', function(){
 			$('#frmImageUpload').submit();
 		});
 
@@ -54,6 +75,31 @@
 				success: function(res) {   // A function to be called if request succeeds
 					$('#PHOTO_IMG').attr('src', '/upload/' + res.dynamicname);
 					$('#txtImageUploaded').val(res.dynamicname);
+				}
+
+			});
+		});
+
+		$('#txtAttach').click(function() {
+			$('#txtFileUpload').click();
+		});
+
+		$('#txtFileUpload').on('change', function(){
+			$('#frmFileUpload').submit();
+		});
+
+		$('#frmFileUpload').on('submit', function(e) {
+			e.preventDefault();
+
+			$.ajax({
+				url: $(this).attr('action'),
+				type: "POST",
+				data: new FormData(this),
+				contentType: false,
+				cache: false,
+				processData:false,
+				success: function(res) {
+					$('#txtAttach').val(res.dynamicname);
 				}
 
 			});

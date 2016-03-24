@@ -28,7 +28,7 @@
 
 	<form action="{{ route('upload.file') }}" method="POST" enctype="multipart/form-data" id="frmFileUpload">
 		{{ csrf_field() }}
-		<input id="txtFileUpload" type="file" name="fileUpload" >
+		<input id="txtFileUpload" class="hide" type="file" name="fileUpload" >
 	</form>
 
 @endsection
@@ -36,6 +36,21 @@
 @push('scripts')
 <script>
 	$(function(){
+
+		setCalendar();
+		function setCalendar(){		
+			$("#REGS_DATE_S").datepicker({
+	      	defaultDate: new Date(),
+		    setDate: new Date(),
+		    changeMonth: true,
+		    numberOfMonths: 1,
+		    dateFormat: "yy-mm-dd",
+		    onClose: function( selectedDate ) {			    	  
+				$("#REGS_DATE_E").datepicker("option", "minDate", selectedDate);
+		    }
+		});
+		$("#REGS_DATE_S").datepicker('setDate', moment().format('YYYY-MM-DD'));
+	}
 		$('#txtImageUpload').on('change', function(){
 			$('#frmImageUpload').submit();
 		});

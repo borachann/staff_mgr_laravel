@@ -19,8 +19,8 @@
 	      	</div>
 		</div>
 
-		@include('partials/form-input', ['label' => 'Date of Birth', 'size' => '50', 'name' => 'dob', 'id' => 'txtdob'])
-
+		@include('partials/form-input', ['label' => 'Date of Birth', 'size' => '50', 'name' => 'dob', 'id' => 'REGS_DATE_S'])
+	
 		@include('partials/form-input', ['label' => 'Position', 'size' => '100', 'id' => 'txtposition', 'name' => 'position'])
 
 		@include('partials/form-input', ['label' => 'Skill', 'id' => 'txtskill', 'name' => 'skill', 'size' => '50'])
@@ -53,12 +53,15 @@
 		  </div>
 		</div>
 
-		<div class="form-group">
+		<!-- <div class="form-group">
 		  <label class="control-label col-md-2">Attach File : </label>
 		  <div class="col-md-10">
-		  		<sapn id="file_up"><input type="text" class="form-control" rows="5" id="txtAttach" name="file_path"></sapn>
+		  		<sapn id="file_up">
+		  			<input type="text" class="form-control" rows="5" id="txtAttach" placeholder="Choos a file to upload..." name="file_path">
+	  			</sapn>
 		  </div>
-		</div>
+		</div> -->
+		@include('partials/form-input', ['label' => 'Attach File ', 'id' => 'txtAttach', 'name' => 'file_path', 'size' => '1000'])
 
 		<div class="form-group">
 		  <label class="control-label col-md-2"></label>
