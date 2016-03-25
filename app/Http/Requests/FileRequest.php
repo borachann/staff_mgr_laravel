@@ -15,7 +15,7 @@ class FileRequest extends Request
     public function rules()
     {
         return [
-            'fileUpload' => 'mimes:doc,docx.pdf,jpeg,jpg,png,gif|max:10000'
+            'fileUpload' => 'mimes:doc,docx,pdf,jpeg,jpg,png,gif|max:10000'
         ];
     }
 }

@@ -47,14 +47,20 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         'uses' => 'UploadController@image'
     ]);
 
+    Route::get('download/{file}', function ($file) {
+        return response()->download($file);
+    });
+
     // Route::get('staff/search/{key?}', [
     //     'as' => 'staff.search',
     //     'uses' => 'StaffController@search'
     // ]);
+
     Route::get('staff/delete/{key}', [
         'as' => 'staff.delete',
         'uses' => 'StaffController@updateStatus'
     ]);
+
     Route::resource('staff', 'StaffController');
 });
 

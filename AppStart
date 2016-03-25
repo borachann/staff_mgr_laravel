@@ -1,0 +1,6 @@
+@echo off
+
+title Laravel App
+
+C:\xampp\mysql_start.bat
+C:\xampp\php\php.exe artisan serve
