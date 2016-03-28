@@ -10,7 +10,7 @@
 
 			{{ Form::model($staff, ['route' => ['staff.update', $staff->id] ] ) }}
 				<input type="hidden" name="_method" value="PATCH">
-				@include('staffs.form', ['btnName' => 'Update', 'showDate' => true])
+			@include('staffs.form', ['btnName' => 'Update', 'showDate' => true])
 			{{ Form::close() }}
 
 			{{ Form::model($staff, ['route' => ['staff.update', $staff->id] ] ) }}
@@ -34,7 +34,7 @@
 @push('scripts')
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#txtAttach").parent().html('<a href="#" class="control-label col-md-10" style="text-align: left;"><b>Download The Attach File</b></a>'); 
+		$("#txtAttach").parent().html('<a href="#" class="control-label col-md-10" style="text-align: left;"><b>Download The Attach File</b></a>');
 		$("input[type=text], textarea").attr('readonly','readonly');
 		$("input[type=radio], input[type=checkbox]").attr('disabled',true);
 	});
@@ -43,7 +43,7 @@
 
 @push('styles')
 <style type="text/css">
-	
+
 	button[type="submit"] {
         display: none;
     }

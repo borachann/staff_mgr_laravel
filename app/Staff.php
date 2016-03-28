@@ -32,7 +32,7 @@ class Staff extends Model
     {
         if ($key != '') {
             $q->where('status', true)
-                ->Where(function ($query) use ($key) {
+                ->where(function ($query) use ($key) {
                     $query->where('fp_number', $key)
                         ->orwhere('name', 'like', $key . '%');})
                 ->orderBy('name', 'asc');
@@ -40,6 +40,22 @@ class Staff extends Model
             $q->where('status', true)->orderBy('name', 'asc');
         }
 
+    }
+
+    public function scopeReportNewStaff($q, $key = '', $date)
+    {
+        if ($key != '') {
+            $q->where('status', true)
+                ->whereBetween('created_at', $date)
+                ->Where(function ($query) use ($key) {
+                    $query->where('fp_number', $key)
+                        ->orwhere('name', 'like', $key . '%');})
+                ->orderBy('name', 'asc');
+        } else {
+            $q->where('status', true)
+                ->whereBetween('created_at', $date)
+                ->orderBy('name', 'asc')->toSql();
+        }
     }
 
 }

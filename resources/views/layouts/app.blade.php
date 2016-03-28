@@ -62,7 +62,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav">
-                        <li>{{ link_to_route('staff.create', 'Report', null) }}</li>
+                        <li>{{ link_to_route('report', 'Report', null) }}</li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

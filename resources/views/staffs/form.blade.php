@@ -20,7 +20,7 @@
 		</div>
 
 		@include('partials/form-input', ['label' => 'Date of Birth', 'size' => '50', 'name' => 'dob', 'id' => 'REGS_DATE_S'])
-	
+
 		@include('partials/form-input', ['label' => 'Position', 'size' => '100', 'id' => 'txtposition', 'name' => 'position'])
 
 		@include('partials/form-input', ['label' => 'Skill', 'id' => 'txtskill', 'name' => 'skill', 'size' => '50'])

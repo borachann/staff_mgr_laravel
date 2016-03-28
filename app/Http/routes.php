@@ -47,9 +47,20 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         'uses' => 'UploadController@image'
     ]);
 
-    Route::get('download/{file}', function ($file) {
-        return response()->download($file);
+    Route::get('download/{file}', [
+        'as' => 'download.file',
+        'uses' => function ($file) {
+            return response()->download('upload/' . $file);
+        }
+    ]);
+
+    /* Route::get('download/file/{$file}', function($file) {
+    return response()->download('files/' . $file);
     });
+
+    Route::get('download/photo/{$file}', function($file) {
+    return response()->download('photos/' . $file);
+    });*/
 
     // Route::get('staff/search/{key?}', [
     //     'as' => 'staff.search',
@@ -61,6 +72,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         'uses' => 'StaffController@updateStatus'
     ]);
 
+    Route::get('report', [
+        'as' => 'report',
+        'uses' => 'ReportController@index'
+    ]);
     Route::resource('staff', 'StaffController');
 });
 

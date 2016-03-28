@@ -40,6 +40,7 @@ class StaffController extends Controller
     public function show($id)
     {
         $data['staff'] = Staff::find($id);
+        $data['file'] = '1458803640smile.jpg';
         return view('staffs.show', $data);
     }
 
