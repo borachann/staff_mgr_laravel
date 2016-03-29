@@ -45,16 +45,14 @@ class Staff extends Model
     public function scopeReportNewStaff($q, $key = '', $date)
     {
         if ($key != '') {
-            $q->where('status', true)
-                ->whereBetween('created_at', $date)
+            $q->whereBetween('created_at', $date)
                 ->Where(function ($query) use ($key) {
                     $query->where('fp_number', $key)
                         ->orwhere('name', 'like', $key . '%');})
-                ->orderBy('name', 'asc');
+                ->orderBy('status', 'desc');
         } else {
-            $q->where('status', true)
-                ->whereBetween('created_at', $date)
-                ->orderBy('name', 'asc')->toSql();
+            $q->whereBetween('created_at', $date)
+                ->orderBy('status', 'desc')->toSql();
         }
     }
 

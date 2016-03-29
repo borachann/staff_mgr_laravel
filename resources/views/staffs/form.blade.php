@@ -53,15 +53,34 @@
 		  </div>
 		</div>
 
-		<!-- <div class="form-group">
-		  <label class="control-label col-md-2">Attach File : </label>
-		  <div class="col-md-10">
-		  		<sapn id="file_up">
-		  			<input type="text" class="form-control" rows="5" id="txtAttach" placeholder="Choos a file to upload..." name="file_path">
-	  			</sapn>
-		  </div>
-		</div> -->
-		@include('partials/form-input', ['label' => 'Attach File ', 'id' => 'txtAttach', 'name' => 'file_path', 'size' => '1000'])
+
+
+			@if (Route::is('staff.create'))
+				<div class="form-group">
+					<label class="control-label col-md-2">Attach File : </label>
+					<div class="col-md-10">
+					  	<sapn id="file_up">
+					  		<input type="text" class="form-control" rows="5" id="txtAttach" placeholder="Choos a file to upload..." name="file_path">
+						</sapn>
+					</div>
+				</div>
+			@endif
+
+			@if (Route::is('staff.edit'))
+				@include('partials/form-input', ['label' => 'Attach File ', 'id' => 'txtAttach', 'name' => 'file_path', 'size' => '1000'])
+			@endif
+
+			@if (Route::is('staff.show'))
+				<div class="form-group">
+					<label class="control-label col-md-2" for="file_path">
+						Download File :
+					</label>
+					<div class="col-md-10">
+						{{ link_to_route('download.file', 'Download The Attach File', $file, ['class' => 'form-control text-left']) }}
+			  		</div>
+				</div>
+			@endif
+
 
 		<div class="form-group">
 		  <label class="control-label col-md-2"></label>
