@@ -47,13 +47,13 @@ class UploadController extends Controller
         return $data;
     }
 
-    public function downloadImage()
-    {
-        $result = $_POST['filename'];
-        $entry = File::where('filename', $result)->firstOrFail();
-        $file = Storage::disk()->get($entry->filePath);
-        $headers = array('Content-Type' => $entry->mimetype);
-        return response()->download(storage_path($entry->filePath), $result, $headers);
-    }
+    // public function downloadImage()
+    // {
+    //     $result = $_POST['filename'];
+    //     $entry = File::where('filename', $result)->firstOrFail();
+    //     $file = Storage::disk()->get($entry->filePath);
+    //     $headers = array('Content-Type' => $entry->mimetype);
+    //     return response()->download(storage_path($entry->filePath), $result, $headers);
+    // }
 
 }

@@ -30,51 +30,14 @@
 			<th style="text-align: center;">Action</th>
 		</tr>
 	</thead>
-	<tbody>
-<?php $i = 0;?>
-		@foreach ($staffs as $staff)
-		<?php $i++;?>
-			<tr>
-				<td style="display:none;">{{ $staff->id }}</td>
-				<td>{{ $staffs->perPage() * ($staffs->currentPage() - 1) +$i }}</td>
-				<td>{{ $staff->fp_number }}</td>
-				<td>{{ $staff->name }}</td>
-				<td>{{ $staff->gender }}</td>
-				<td>{{ $staff->position }}</td>
-				{{-- <td>{{ $staff->dob }}</td> --}}
-				{{-- <td>{{ $staff->skill }}</td> --}}
-				{{-- <td>{{ $staff->level }}</td> --}}
-				{{-- <td>{{ $staff->readable }}</td> --}}
-				{{-- <td>{{ $staff->ld_grp }}</td> --}}
-				<td>{{ $staff->phone }}</td>
-				{{-- <td>{{ $staff->work_grp }}</td> --}}
-				{{-- <td>{{ $staff->created_at }}</td>
-				<td>{{ $staff->updated_at }}</td> --}}
-				{{-- <td>@include('staffs.delete')</td> --}}
-				<td class="actions" style="text-align:center;">
-					{{-- <a class="on-default edit-row" href="{{ route('staff.edit',$staff->id) }}">
-						<i class="fa fa-trash-o"></i>
-					</a> --}}
-					<a class="on-default edit-row" href="{{ route('staff.delete',$staff->id) }}">
-						<i class="fa fa-trash-o fa-fw"></i>
-					</a> |
-					<a class="on-default edit-row" href="{{ route('staff.edit',$staff->id) }}">
-				      	<i class="fa fa-pencil"></i>
-				    </a> |
-				    <a class="on-default edit-row" href="{{ route('staff.show',$staff->id) }}">
-						<i class="fa fa-info-circle"></i>
-					</a>
-				</td>
-
-				{{-- <td>{{ link_to_route('staff.edit','UPDATE', $staff->id, ['class' => 'btn btn-sm btn-primary']) }}</td>
-				<td>{{ link_to_route('staff.show','DETAIL', $staff->id, ['class' => 'btn btn-sm btn-info']) }}</td> --}}
-			</tr>
-		@endforeach
+	<tbody id="tblReport">
+		<tr>
+			<td class="text-center" colspan="10">No Record</td>
+		</tr>
 	</tbody>
 
 </table>
 </div>
-<div style="text-align: center;">{!! $staffs->links() !!}</div>
 
 
 @endsection
@@ -83,6 +46,8 @@
 <script type="text/javascript">
 	$(function(){
 		setCalendar();
+		listReport();
+
 		function setCalendar(){
 			$("#REGS_DATE_S").datepicker({
 	      	defaultDate: new Date(),
@@ -91,7 +56,8 @@
 		    numberOfMonths: 1,
 		    dateFormat: "yy-mm-dd",
 		    onClose: function( selectedDate ) {
-				$("#REGS_DATE_S").datepicker("option", "minDate", selectedDate);
+				$("#REGS_DATE_E").datepicker("option", "mimDate", selectedDate);
+				listReport();
 
 		    }
 		});
@@ -102,7 +68,8 @@
 		    numberOfMonths: 1,
 		    dateFormat: "yy-mm-dd",
 		    onClose: function( selectedDate ) {
-				$("#REGS_DATE_E").datepicker("option", "minDate", selectedDate);
+				$("#REGS_DATE_S").datepicker("option", "maxDate",   selectedDate);
+				listReport();
 		    }
 		});
 		$("#REGS_DATE_S").datepicker('setDate', moment().startOf('month').format('YYYY-MM-DD'));
@@ -110,6 +77,16 @@
 		$("#REGS_DATE_E").datepicker('setDate', moment().endOf('month').format('YYYY-MM-DD'));
 	}
 	function listReport(){
+		var url = '{{ route('query') }}', data = [];
+
+		url += '?sdate=' + $('#REGS_DATE_S').val();
+		url += '&edate=' + $('#REGS_DATE_E').val();
+
+		$.get(url, function(res){
+			if (data = res.staffs) {
+				console.log(data);
+			}
+		});
 
 	}
 });
