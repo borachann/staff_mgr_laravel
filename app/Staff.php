@@ -37,7 +37,7 @@ class Staff extends Model
                         ->orwhere('name', 'like', $key . '%');})
                 ->orderBy('name', 'asc');
         } else {
-            $q->where('status', true)->orderBy('name', 'asc');
+            $q->where('status', true)->orderBy('id', 'desc');
         }
 
     }

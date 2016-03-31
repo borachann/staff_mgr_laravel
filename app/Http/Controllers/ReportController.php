@@ -19,11 +19,11 @@ class ReportController extends Controller
     {
         if ($request->has('sdate') && $request->has('edate')) {
             $sdate = $request->sdate;
-            $edate = $request->edate;
+            $edate = $request->edate . " 23:59:59";
 
             $key = $request->has('key') ? $request->input('key') : '';
             $data['key'] = $key;
-            $data['staffs'] = Staff::reportNewStaff($key, [$sdate, $edate])->paginate($this->staffPerPage);
+            $data['staffs'] = Staff::reportNewStaff($key, [$sdate, $edate])->get();//paginate($this->staffPerPage);
             return $data;
         }
     }

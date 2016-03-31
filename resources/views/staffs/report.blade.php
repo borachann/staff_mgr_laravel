@@ -2,7 +2,7 @@
 
 @section ('content')
 <div class='text-center'>
-	<h3 align="center">Report Information <span class="pull-right"><a href="javascript:;"><i class="fa fa-print"></i></a></span></h3>
+	<h3 align="center">Report Information <span class="pull-right"><a href="javascript:;" onclick="window.print()"><i class="fa fa-print"></i></a></span></h3>
 
 </div>
 	<hr>
@@ -94,24 +94,24 @@
 			/*if (data = res.staffs) {
 				console.log(data);
 			}*/
-
-			if(res.staffs.total > 0){
-				for( i=0; i < res.staffs.total; i++){
+console.log(res);
+			if(res.staffs.length > 0){
+				for( i=0; i < res.staffs.length; i++){
 					st += "<tr>"
-						st += "<td>" + (i+1) + "</td>";
-						st += "<td>" + res.staffs.data[i].fp_number + "</td>";
-						st += "<td>" + res.staffs.data[i].name + "</td>";
-						st += "<td>" + res.staffs.data[i].gender+ "</td>";
-						st += "<td>" + res.staffs.data[i].position+ "</td>";
-						st += "<td>" + res.staffs.data[i].phone+ "</td>";
-						if(res.staffs.data[i].status == 1){
-							act += 1;
-							st += "<td class='text-center'>" + 'Active'+ "</td>";
-						}else{
-							dis += 1;
-							st += "<td class='text-center'>" + 'Disactive'+ "</td>";
-						}
-						st += "</tr>";
+					st += "<td>" + (i+1) + "</td>";
+					st += "<td>" + res.staffs[i].fp_number + "</td>";
+					st += "<td>" + res.staffs[i].name + "</td>";
+					st += "<td>" + res.staffs[i].gender+ "</td>";
+					st += "<td>" + res.staffs[i].position+ "</td>";
+					st += "<td>" + res.staffs[i].phone+ "</td>";
+					if(res.staffs[i].status == 1){
+						act += 1;
+						st += "<td class='text-center'>" + 'Active'+ "</td>";
+					}else{
+						dis += 1;
+						st += "<td class='text-center'>" + 'Disactive'+ "</td>";
+					}
+					st += "</tr>";
 				}
 			}else{
 				st += "<tr>";
