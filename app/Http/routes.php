@@ -82,6 +82,11 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         'uses' => 'ReportController@query'
     ]);
 
+    Route::get('printReport', [
+        'as' => 'printReport',
+        'uses' => 'ReportController@print'
+    ]);
+
     Route::resource('staff', 'StaffController');
 });
 

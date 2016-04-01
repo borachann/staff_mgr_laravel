@@ -23,7 +23,20 @@ class ReportController extends Controller
 
             $key = $request->has('key') ? $request->input('key') : '';
             $data['key'] = $key;
-            $data['staffs'] = Staff::reportNewStaff($key, [$sdate, $edate])->get();//paginate($this->staffPerPage);
+            $data['staffs'] = Staff::reportNewStaff($key, [$sdate, $edate])->paginate($this->staffPerPage);
+            return $data;
+        }
+    }
+
+    public function print(Request $request)
+    {
+        if ($request->has('sdate') && $request->has('edate')) {
+            $sdate = $request->sdate;
+            $edate = $request->edate . " 23:59:59";
+
+            $key = $request->has('key') ? $request->input('key') : '';
+            $data['key'] = $key;
+            $data['staffs'] = Staff::reportNewStaff($key, [$sdate, $edate])->paginate($this->staffPerPage);
             return $data;
         }
     }
