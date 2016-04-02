@@ -28,7 +28,7 @@ class ReportController extends Controller
         }
     }
 
-    public function print(Request $request)
+    public function printReport(Request $request)
     {
         if ($request->has('sdate') && $request->has('edate')) {
             $sdate = $request->sdate;
@@ -36,7 +36,8 @@ class ReportController extends Controller
 
             $key = $request->has('key') ? $request->input('key') : '';
             $data['key'] = $key;
-            $data['staffs'] = Staff::reportNewStaff($key, [$sdate, $edate])->paginate($this->staffPerPage);
+            $data['staffs'] = Staff::reportNewStaff($key, [$sdate, $edate])->get();
+            //console.log(Staff::reportNewStaff($key, [$sdate, $edate])->toSql());
             return $data;
         }
     }

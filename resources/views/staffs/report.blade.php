@@ -1,6 +1,7 @@
 @extends ('layouts.app')
 
 @section ('content')
+<div class=" hidden-print">
 <div class='text-center'>
 	<h3 align="center">Report Information <span class="pull-right hidden-print"><a href="javascript:;" onclick="window.print()"><i class="fa fa-print"></i></a></span></h3>
 
@@ -46,6 +47,52 @@
 </div>
 <label>Total Active : </label>	<input type="text" id="txtactive" style="padding-left: 1%;"> ~
 <label>Total Disactive : </label>	<input type="text" id="txtdisactive" style="padding-left: 1%;">
+</div>
+<div class="visible-print-block">
+<div class='text-center'>
+	<h3 align="center">Report Information</h3>
+</div>
+	<hr>
+
+<label>Start Date : </label>	<span id = 'lblstart'></span> ~
+<label>End Date : </label>	<span id = 'lblend'></span>
+<hr>
+<div class="table-responsive">
+<table class="table">
+	<thead>
+		<tr>
+			<th>N<sup> o</sup></th>
+			<th>FP_Number</th>
+			<th>Name</th>
+			<th>Gender</th>
+			<th>Position</th>
+
+			{{-- <th>Skill</th> --}}
+			{{-- <th>Level</th> --}}
+			{{-- <th>Readable</th> --}}
+			{{-- <th>Lead Group</th> --}}
+			<th>Phone</th>
+			{{-- <th>Work Group</th> --}}
+			{{-- <th>Delete</th> --}}
+			{{-- <th>Start Date</th>
+			<th>Update</th> --}}
+			<th style="text-align: center;">Status</th>
+		</tr>
+	</thead>
+	<tbody id="tblPrintReport">
+		<tr>
+			<td class="text-center" colspan="10">No Record</td>
+		</tr>
+	</tbody>
+
+</table>
+</div>
+<hr>
+
+<label>Total Active : </label>	<span id='lblactive'></span> ~ 
+<label>Total Disactive : </label>	<span id='lbldeactivate'></span>
+</div>
+
 @endsection
 
 @push('scripts')
@@ -53,7 +100,7 @@
 	$(function(){
 		setCalendar();
 		listReport();
-
+		printReport();
 		function setCalendar(){
 			$("#REGS_DATE_S").datepicker({
 	      	defaultDate: new Date(),
@@ -64,7 +111,7 @@
 		    onClose: function( selectedDate ) {
 				$("#REGS_DATE_E").datepicker("option", "mimDate", selectedDate);
 				listReport();
-
+				printReport();
 		    }
 		});
 			$("#REGS_DATE_E").datepicker({
@@ -76,6 +123,7 @@
 		    onClose: function( selectedDate ) {
 				$("#REGS_DATE_S").datepicker("option", "maxDate",   selectedDate);
 				listReport();
+				printReport();
 		    }
 		});
 		$("#REGS_DATE_S").datepicker('setDate', moment().startOf('month').format('YYYY-MM-DD'));
@@ -159,12 +207,46 @@
 	}
 
 	function printReport(){
-		var url = {{ route('printReport')}};
+		var url = '{{ route('printReport')}}';
 			url += '?sdate=' + $('#REGS_DATE_S').val();
 			url += '&edate=' + $('#REGS_DATE_E').val ();
 
-		$.get(url,function(res){
-			console.log(res);
+		$.get(url, function(res){
+		//	console.log(res.staffs.length);
+		var record = res.staffs;
+		var st = "", act = 0, dis = 0;
+			if(record.length != 0){
+				for( i=0; i < record.length; i++){
+					var staff = record[i];
+
+					st += "<tr>"
+					st += "<td>" + (object.from + i) + "</td>";
+					st += "<td>" + staff.fp_number + "</td>";
+					st += "<td>" + staff.name + "</td>";
+					st += "<td>" + staff.gender+ "</td>";
+					st += "<td>" + staff.position+ "</td>";
+					st += "<td>" + staff.phone+ "</td>";
+					if(staff.status == 1){
+						act += 1;
+						st += "<td class='text-center'>" + 'Active'+ "</td>";
+					}else{
+						dis += 1;
+						st += "<td class='text-center'>" + 'Disactive'+ "</td>";
+					}
+					st += "</tr>";
+				}
+			}else{
+				st += "<tr>";
+					st +="<td class='text-center' colspan='10'>No Record</td>";
+				st += "</tr>";
+			}
+			$("#tblPrintReport").html(st);
+			$("#txtactive").val(act);
+			$("#txtdisactive").val(dis);
+			$("#lblactive").html(" " + act);
+			$("#lbldeactivate").html(" " + dis);
+			$("#lblstart").html(" " + $('#REGS_DATE_S').val());
+			$("#lblend").html(" " + $('#REGS_DATE_E').val());
 		});
 	}
 });
